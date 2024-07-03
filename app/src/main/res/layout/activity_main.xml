@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/map_fragment"
         android:name="com.google.android.gms.maps.SupportMapFragment"
@@ -19,4 +20,56 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5" />
 
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardUseCompatPadding="true"
+        android:elevation="4dp"
+        app:cardBackgroundColor="@color/white"
+        app:strokeColor="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="12dp">
+
+            <RadioButton
+                android:id="@+id/normalBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Normal"
+                android:checked="true"
+                app:buttonTint="@color/black"
+                android:textColor="@color/black"/>
+
+            <RadioButton
+                android:id="@+id/satelliteBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Satellite"
+                app:buttonTint="@color/black"
+                android:textColor="@color/black"/>
+
+            <RadioButton
+                android:id="@+id/hybridBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hybrid"
+                app:buttonTint="@color/black"
+                android:textColor="@color/black"/>
+
+            <RadioButton
+                android:id="@+id/terrainBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Terrain"
+                app:buttonTint="@color/black"
+                android:textColor="@color/black"/>
+        </RadioGroup>
+
+    </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
