@@ -50,15 +50,24 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         }
         val mapFragment =
             supportFragmentManager.findFragmentById(R.id.map_fragment) as? SupportMapFragment
-
         mapFragment?.getMapAsync(this)
     }
 
     override fun onMapReady(map: GoogleMap?) {
         this.map = map
         map?.mapType = GoogleMap.MAP_TYPE_NORMAL
-        map?.uiSettings?.isZoomControlsEnabled = true
+
         val latLng = LatLng(28.7041, 77.1025)
         map?.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 19f))
+
+        map?.uiSettings?.isZoomControlsEnabled = true
+        map?.uiSettings?.isZoomGesturesEnabled = true
+        map?.uiSettings?.isCompassEnabled = true
+        map?.uiSettings?.isRotateGesturesEnabled = true
+        map?.uiSettings?.isTiltGesturesEnabled = true
+        map?.uiSettings?.isScrollGesturesEnabled = true
+        map?.uiSettings?.isScrollGesturesEnabledDuringRotateOrZoom = false
+        map?.uiSettings?.isIndoorLevelPickerEnabled = true
+
     }
 }
