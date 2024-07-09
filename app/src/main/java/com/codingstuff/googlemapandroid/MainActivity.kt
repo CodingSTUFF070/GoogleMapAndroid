@@ -1,6 +1,7 @@
 package com.codingstuff.googlemapandroid
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.RadioGroup
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -11,7 +12,10 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.UiSettings
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MapStyleOptions
+import com.google.android.gms.maps.model.MarkerOptions
 
 class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -55,19 +59,38 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(map: GoogleMap?) {
         this.map = map
+        map?.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.map_styles))
         map?.mapType = GoogleMap.MAP_TYPE_NORMAL
 
-        val latLng = LatLng(28.7041, 77.1025)
+        map?.uiSettings?.isZoomControlsEnabled = true
+        map?.uiSettings?.isMapToolbarEnabled = true
+
+        val latLng = LatLng(28.7050, 77.1025)
+        val latLng2 = LatLng(28.7050, 77.1030)
         map?.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 19f))
 
-        map?.uiSettings?.isZoomControlsEnabled = true
-        map?.uiSettings?.isZoomGesturesEnabled = true
-        map?.uiSettings?.isCompassEnabled = true
-        map?.uiSettings?.isRotateGesturesEnabled = true
-        map?.uiSettings?.isTiltGesturesEnabled = true
-        map?.uiSettings?.isScrollGesturesEnabled = true
-        map?.uiSettings?.isScrollGesturesEnabledDuringRotateOrZoom = false
-        map?.uiSettings?.isIndoorLevelPickerEnabled = true
 
+        val markerOptions = MarkerOptions()
+        markerOptions.position(latLng)
+        markerOptions.title("Location1")
+        markerOptions.snippet("This is my home !!")
+        //  markerOptions.alpha(3f)
+        markerOptions.draggable(true)
+        //  markerOptions.rotation(12f)
+        markerOptions.flat(true)
+        markerOptions.visible(true)
+        //   markerOptions.infoWindowAnchor(-3f,2f)
+        //    markerOptions.anchor(2f,2f)
+        markerOptions.zIndex(0f)
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE))
+        Log.i("markerValues", "onMapReady: ${markerOptions.position}")
+        map?.addMarker(markerOptions)
+
+        val markerOptions2 = MarkerOptions()
+        markerOptions2.position(latLng2)
+        markerOptions2.title("Location2")
+        markerOptions2.zIndex(1f)
+        markerOptions2.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))
+        map?.addMarker(markerOptions2)
     }
 }
