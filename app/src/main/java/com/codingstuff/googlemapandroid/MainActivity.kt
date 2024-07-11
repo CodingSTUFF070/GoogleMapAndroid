@@ -1,10 +1,13 @@
 package com.codingstuff.googlemapandroid
 
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.os.Bundle
 import android.util.Log
 import android.widget.RadioGroup
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -66,31 +69,25 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         map?.uiSettings?.isMapToolbarEnabled = true
 
         val latLng = LatLng(28.7050, 77.1025)
-        val latLng2 = LatLng(28.7050, 77.1030)
         map?.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 19f))
 
+        val markerOption = MarkerOptions()
+        markerOption.position(latLng)
+        markerOption.title("Location")
+        markerOption.snippet("This is my location")
+        markerOption.icon(BitmapDescriptorFactory.fromBitmap(getBitmapFromDrawable(R.drawable.location)))
+        map?.addMarker(markerOption)
+    }
 
-        val markerOptions = MarkerOptions()
-        markerOptions.position(latLng)
-        markerOptions.title("Location1")
-        markerOptions.snippet("This is my home !!")
-        //  markerOptions.alpha(3f)
-        markerOptions.draggable(true)
-        //  markerOptions.rotation(12f)
-        markerOptions.flat(true)
-        markerOptions.visible(true)
-        //   markerOptions.infoWindowAnchor(-3f,2f)
-        //    markerOptions.anchor(2f,2f)
-        markerOptions.zIndex(0f)
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE))
-        Log.i("markerValues", "onMapReady: ${markerOptions.position}")
-        map?.addMarker(markerOptions)
-
-        val markerOptions2 = MarkerOptions()
-        markerOptions2.position(latLng2)
-        markerOptions2.title("Location2")
-        markerOptions2.zIndex(1f)
-        markerOptions2.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))
-        map?.addMarker(markerOptions2)
+    private fun getBitmapFromDrawable(resId: Int): Bitmap? {
+        var bitmap : Bitmap? = null
+        val drawable = ResourcesCompat.getDrawable(resources , resId , null)
+        if (drawable != null){
+            bitmap = Bitmap.createBitmap(150 , 150 , Bitmap.Config.ARGB_8888)
+            val canvas = Canvas(bitmap)
+            drawable.setBounds(0,0,canvas.width , canvas.height)
+            drawable.draw(canvas)
+        }
+        return bitmap
     }
 }
