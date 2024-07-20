@@ -10,6 +10,8 @@ appcompat = "1.7.0"
 material = "1.12.0"
 activity = "1.9.0"
 googleMaps = "17.0.0"
+roundeImage = "2.3.0"
+
 constraintlayout = "2.1.4"
 
 [libraries]
@@ -21,6 +23,7 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 google-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "googleMaps" }
+rounde-image = { group = "com.makeramen", name = "roundedimageview", version.ref = "roundeImage" }
 
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 

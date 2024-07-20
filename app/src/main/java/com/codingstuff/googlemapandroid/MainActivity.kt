@@ -73,10 +73,13 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
         val markerOption = MarkerOptions()
         markerOption.position(latLng)
+
         markerOption.title("Location")
         markerOption.snippet("This is my location")
         markerOption.icon(BitmapDescriptorFactory.fromBitmap(getBitmapFromDrawable(R.drawable.location)))
-        map?.addMarker(markerOption)
+        val marker = map?.addMarker(markerOption)
+        marker?.tag = CustomInfoWindowData("XYZ Hotel" , getString(R.string.desc),R.drawable.hotel_two)
+        map?.setInfoWindowAdapter(CustomInfoWindowAdapter(this))
     }
 
     private fun getBitmapFromDrawable(resId: Int): Bitmap? {
